@@ -44,60 +44,35 @@ functionality is provided to allow user call `compinit` only once in `.zshrc`.
 **Example plugin report:**
 
 ```
-% zpl report psprint/zsh-cmd-architect
-Plugin report for psprint/zsh-cmd-architect
--------------------------------------------
-Source zsh-cmd-architect.plugin.zsh
-Autoload h-list
-Autoload h-list-input
-Autoload h-list-draw
-Autoload zca
-Autoload zca-usetty-wrapper
-Autoload zca-widget
-Zle -N zca-widget
-Bindkey ^T zca-widget
+% zpl report TomfromBerlin/zsh-cmd-time
+Plugin report for TomfromBerlin/zsh-cmd-time
+--------------------------------------------
+Source cmd-time.plugin.zsh
 
 Functions created:
-h-list             h-list-draw
-h-list-input       zca
-zca-usetty-wrapper zca-widget
+_cmd_time_precmd _cmd_time_preexec
+TRAPWINCH        zsh_cmd_time
 
-Options changed:
-autolist     was unset
-menucomplete was unset
-
-PATH elements added:
-/Users/sgniazdowski/github/zsh-cmd-architect/bin
-
-FPATH elements added:
-/Users/sgniazdowski/github/zsh-cmd-architect
-
-Completions:
-_xauth [disabled]
+Variables added or redefined:
+_CMD_TIME_DIR  [ "" -> scalar ]
 ```
 
-![report example](http://imageshack.com/a/img923/4237/OHC0i5.png)
+![plugin_report](https://user-images.githubusercontent.com/123265893/236509585-40590ebe-7835-4ff6-a15b-e8c3c495cc0f.jpg)
 
 **Example plugin unload:**
 
 ```
-% zpl unload psprint/zsh-cmd-architect
-Deleting function h-list
-Deleting function h-list-draw
-Deleting function h-list-input
-Deleting function zca
-Deleting function zca-usetty-wrapper
-Deleting function zca-widget
-Deleting bindkey ^T zca-widget
-Setting option autolist
-Setting option menucomplete
-Removing PATH element /Users/sgniazdowski/github/zsh-cmd-architect/bin
-Removing FPATH element /Users/sgniazdowski/github/zsh-cmd-architect
-Unregistering plugin psprint/zsh-cmd-architect
+% zpl unload TomfromBerlin/zsh-cmd-time
+Deleting function _cmd_time_precmd
+Deleting function _cmd_time_preexec
+Deleting function TRAPWINCH
+Deleting function zsh_cmd_time
+Unsetting variable _CMD_TIME_DIR
+Unregistering plugin TomfromBerlin/zsh-cmd-time
 Plugin's report saved to $LASTREPORT
 ```
 
-![unload example](http://imageshack.com/a/img921/9896/rMMnQ1.png)
+![plugin_unload](https://user-images.githubusercontent.com/123265893/236510141-65ec6754-440c-4764-b17a-bde096e092eb.jpg)
 
 **Example `csearch` invocation (completion management):**
 
@@ -118,42 +93,57 @@ Plugin's report saved to $LASTREPORT
 **Example `compile` invocation:**
 
 ```
-# zplg compile zsh-users/zsh-syntax-highlighting
+% zplg uncompile TomfromBerlin/zsh-syntax-highlighting
+TomfromBerlin/zsh-syntax-highlighting not compiled
+% zplg compile TomfromBerlin/zsh-syntax-highlighting
 Compiling zsh-syntax-highlighting.plugin.zsh...
-# zplg compiled
-zsh-users/zsh-syntax-highlighting:
+% zplg compiled
+TomfromBerlin/zsh-syntax-highlighting:
 zsh-syntax-highlighting.plugin.zsh.zwc
-# zplg uncompile zsh-users/zsh-syntax-highlighting
+% zplg uncompile TomfromBerlin/zsh-syntax-highlighting
 Removing zsh-syntax-highlighting.plugin.zsh.zwc
-# zplg compiled
+% zplg compiled
 No compiled plugins
-# zplg compile-all
-zsh-users/zsh-syntax-highlighting
+% zplg compile-all
+chriskempson/base16-shell:
+Compiling base16-shell.plugin.zsh...
+marlonrichert/zsh-autocomplete:
+Compiling zsh-autocomplete.plugin.zsh...
+TomfromBerlin/zsh-autosuggestions:
+Compiling zsh-autosuggestions.plugin.zsh...
+TomfromBerlin/zsh-cmd-time:
+Compiling cmd-time.plugin.zsh...
+TomfromBerlin/zsh-completions:
+Compiling zsh-completions.plugin.zsh...
+TomfromBerlin/zsh-history-substring-search:
+Compiling zsh-history-substring-search.plugin.zsh...
+TomfromBerlin/zsh-syntax-highlighting:
 Compiling zsh-syntax-highlighting.plugin.zsh...
+
 ```
 
-![compile example](http://imageshack.com/a/img923/6655/gexv8M.png)
+![plugin_compile](https://user-images.githubusercontent.com/123265893/236512770-c24ccb0c-14a4-41a4-839a-a56104c7d316.jpg)
 
 **Example `create` invocation:**
 
 ```
-% zplg create psprint/testplugin
-Github user name or just "_local": psprint
-Plugin name: testplugin2
-Plugin is psprint/testplugin2
+% zplg create ~/.zplugin/plugins/testplugin
+Github user name or just "_local": TomfromBerlin
+Plugin name: testplugin
+Plugin is TomfromBerlin/testplugin
 Creating Github repository
-Enter host password for user 'psprint':
-Cloning into 'psprint---testplugin2'...
+Enter host password for user 'TomfromBerlin':
+Cloning into 'TomfromBerlin---testplugin'...
 warning: You appear to have cloned an empty repository.
 Checking connectivity... done.
-Remote repository psprint/testplugin2 set up as origin
+Remote repository TomfromBerlin/testplugin set up as origin
 You're in plugin's local folder
 The files aren't added to git
 Your next step after commiting will be:
 git push -u origin master
 % ls
 .git                   README.md
-LICENSE                testplugin2.plugin.zsh
+LICENSE                testplugin.plugin.zsh
 ```
 
 ![create example](http://imageshack.com/a/img921/8966/NURP24.png)
@@ -163,7 +153,7 @@ LICENSE                testplugin2.plugin.zsh
 Execute:
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/psprint/zplugin/master/doc/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/TomfromBerlin/zplugin/master/doc/install.sh)"
 ```
 
 To update run the command again (or just execute `doc/install.sh`).
@@ -182,7 +172,7 @@ To manually install `Zplugin` clone the repo to e.g. `~/.zplugin/bin`:
 
 ```sh
 mkdir ~/.zplugin
-git clone https://github.com/psprint/zplugin.git ~/.zplugin/bin
+git clone https://github.com/TomfromBerlin/zplugin.git ~/.zplugin/bin
 ```
 
 and source it from `.zshrc` (**above compinit**):
