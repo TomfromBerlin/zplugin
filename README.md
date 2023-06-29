@@ -36,7 +36,7 @@ functionality is provided to allow user call `compinit` only once in `.zshrc`.
 **Example use:**
 
 ```
-% . ~/github/zplugin/zplugin.zsh
+% . ~/github/TomfromBerlin/zplugin.zsh
 % zplugin load zsh-users/zsh-syntax-highlighting
 % zplugin load psprint/zsh-cmd-architect
 ```
